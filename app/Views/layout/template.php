@@ -31,7 +31,7 @@
     <link href="<?=base_url() ?>/asset/build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body class="nav-md">
+<body class="nav-md footer_fixed">
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
