@@ -1,6 +1,6 @@
 <?php echo $this->extend('layout/template') ?>
 <?php echo $this->section('content') ?>
-
+<link rel="stylesheet" href="<?=base_url() ?>/css/style.css">
 <div class="page-title">
               <div class="title_left">
                 <h3>Komik <small></small></h3>
@@ -39,13 +39,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                      <?php $i=1; foreach ($komik as $k): ?>
                         <tr>
-                          <th scope="row">1</th>
-                          <td><img src="" alt=""></td>
-                          <td>Naruto</td>
-                          <td><a href="" class="btn btn-success">Detail</a></td>
+                          <th scope="row"><?=$i ?></th>
+                          <td><img src="<?=$k['sampul'] ?>" alt="" class="sampul"></td>
+                          <td><?=$k['judul'] ?></td>
+                          <td><a href="/komik/detail/<?=$k['slug'] ?>" class="btn btn-success">Detail</a></td>
                         </tr>
-                       
+                       <?php $i++; endforeach; ?>
                       </tbody>
                     </table>
             </div>
