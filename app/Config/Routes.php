@@ -37,6 +37,7 @@ $routes->get('/coba/(:any)','Coba::about/$1');
 
 $routes->get('/users','Admin\Users::index');
 
+$routes->get('/komik/create','Komik::create');
 $routes->get('/komik/(:segment)','Komik::detail/$1');
 
 /**
