@@ -44,7 +44,7 @@ class Komik extends BaseController
 
     public function create()
     {
-        session();
+        // session();
         $data = [
             'validation' => \Config\Services::validation()
         ];
