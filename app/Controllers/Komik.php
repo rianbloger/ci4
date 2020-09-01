@@ -44,7 +44,11 @@ class Komik extends BaseController
 
     public function create()
     {
-       return view('komik/create');
+        session();
+        $data = [
+            'validation' => \Config\Services::validation()
+        ];
+       return view('komik/create',$data);
     }
 
     public function save()
@@ -56,6 +60,15 @@ class Komik extends BaseController
         // $data = $this->request->getVar('judul');
         // untuk semua
         // $data = $this->request->getVar();
+        // validasi input
+        if(!$this->validate([
+            'judul' => 'required|is_unique[komik.judul]'
+        ])){
+            $validation = \Config\Services::validation();
+            $data['validation'] = $validation;
+            // return view('komik/create',$data);
+            return redirect()->to('/komik/create')->withInput()->with('validation',$validation);
+        }
         $slug = url_title($this->request->getVar('judul'),'-',true);
         $this->komikModel->save(
             [
