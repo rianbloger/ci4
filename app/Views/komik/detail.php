@@ -29,8 +29,13 @@
                 <h5 class="card-title"><?= $komik['judul']; ?></h5>
                 <p class="card-text">Penulis : <?= $komik['penulis']; ?></p>
                 <p class="card-text"><small class="text-muted">Penerbit : <?= $komik['penerbit']; ?></small></p>
-                <div class="btn btn-info">Update</div>
-                <div class="btn btn-danger">Delete</div>
+                <a href="/komik/edit/<?php echo $komik['slug'] ?>" class="btn btn-info">Update</a>
+                <form action="/komik/<?=$komik['id'] ?>" method="post" class="d-inline" >
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin')">Delete</button>
+                </form>
+<!--                <a href="/komik/delete/--><?//=$komik['id']; ?><!--" class="btn btn-danger">Delete</a>-->
             </div>
         </div>
     </div>

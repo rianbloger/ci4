@@ -53,7 +53,7 @@ if(session()->getFlashdata('pesan')):
                           <th scope="row"><?=$i ?></th>
                           <td><img src="<?=$k['sampul'] ?>" alt="" class="sampul"></td>
                           <td><?=$k['judul'] ?></td>
-                          <td><a href="/komik/detail/<?=$k['slug'] ?>" class="btn btn-success">Detail</a></td>
+                          <td><a href="/komik/<?=$k['slug'] ?>" class="btn btn-success">Detail</a></td>
                         </tr>
                        <?php $i++; endforeach; ?>
                       </tbody>
