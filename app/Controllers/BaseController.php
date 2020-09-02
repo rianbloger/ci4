@@ -16,7 +16,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class BaseController extends Controller
+class  BaseController extends Controller
 {
 
 	/**
