@@ -46,10 +46,14 @@
             </div>
             <div class="form-group row">
                 <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
-                <div class="col-sm-10">
+                <div class="col-sm-2">
+                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                </div>
+
+                <div class="col-sm-8">
 <!--                    <input type="text" class="form-control" id="sampul" name="sampul" value="--><?//=old('sampul') ?><!--">-->
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input <?= ($validation->hasError('sampul')) ? 'is-invalid' : '' ; ?>"
+                        <input type="file" class="custom-fi le-input <?= ($validation->hasError('sampul')) ? 'is-invalid' : '' ; ?>"
                                id="sampul" name="sampul">
                         <label class="custom-file-label" for="sampul">Pilih gambar</label>
                         <div class="invalid-feedback">
@@ -70,3 +74,13 @@
 </div>
 
 <?php echo $this->endSection() ?>
+
+<script>
+    const sampul = document.querySelector('#sampul');
+    const samplulLabel = document.querySelector('custom-file-label');
+    const imgPreview = document.querySelector('img-preview');
+
+    samplulLabel.textContent = sampul.files[0].name;
+
+    const fileSampul = new FileReader();
+</script>
