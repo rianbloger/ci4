@@ -74,7 +74,10 @@ class Komik extends BaseController
             'sampul' => [
                 'rules' => 'uploaded[sampul]|max_size[sampul,1024]|is_image[sampul]|mime_in[image/jpg, image/jpeg, image/png]',
                 'errors' => [
-                    'uploaded' => '{field} komik harus di isi'
+                    'uploaded' => 'Pilih gambar sampul terlebih dahulu',
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                    'is_image' => 'Yang anda pilih bukan gambar',
+                    'mime_in' => 'Yang anda pilih bukan gambar'
                 ]
             ]
         ])){
@@ -85,6 +88,7 @@ class Komik extends BaseController
 //            return redirect()->to('/komik/create')->withInput()->with('validation',$validation);
             return redirect()->to('/komik/create')->withInput();
         }
+        dd($this->request->getVar());
         $slug = url_title($this->request->getVar('judul'),'-',true);
         $this->komikModel->save(
             [
