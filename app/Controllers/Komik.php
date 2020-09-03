@@ -70,12 +70,20 @@ class Komik extends BaseController
                     'required' => '{field} komik harus di isi',
                     'is_unique' => '{field} komik sudah terdaftar'
                 ]
+            ],
+            'sampul' => [
+                'rules' => 'uploaded[sampul]|max_size[sampul,1024]|is_image[sampul]|mime_in[image/jpg, image/jpeg, image/png]',
+                'errors' => [
+                    'uploaded' => '{field} komik harus di isi'
+                ]
             ]
         ])){
-            $validation = \Config\Services::validation();
-            $data['validation'] = $validation;
+//            gak perlu karena datanya sudah kita kirim lewat withInput()
+//            $validation = \Config\Services::validation();
+//            $data['validation'] = $validation;
             // return view('komik/create',$data);
-            return redirect()->to('/komik/create')->withInput()->with('validation',$validation);
+//            return redirect()->to('/komik/create')->withInput()->with('validation',$validation);
+            return redirect()->to('/komik/create')->withInput();
         }
         $slug = url_title($this->request->getVar('judul'),'-',true);
         $this->komikModel->save(
