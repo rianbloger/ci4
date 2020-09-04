@@ -54,7 +54,7 @@
 <!--                    <input type="text" class="form-control" id="sampul" name="sampul" value="--><?//=old('sampul') ?><!--">-->
                     <div class="custom-file">
                         <input type="file" class="custom-fi le-input <?= ($validation->hasError('sampul')) ? 'is-invalid' : '' ; ?>"
-                               id="sampul" name="sampul">
+                               id="sampul" name="sampul" onchange="previewaimg()">
                         <label class="custom-file-label" for="sampul">Pilih gambar</label>
                         <div class="invalid-feedback">
                             <?= $validation->getError('sampul') ?>
@@ -72,15 +72,24 @@
 
     </div>
 </div>
+<script>
+    function previewaimg(){
+        const sampul = document.querySelector('#sampul');
+        const samplulLabel = document.querySelector('.custom-file-label');
+        const imgPreview = document.querySelector('.img-preview');
+
+        samplulLabel.textContent = sampul.files[0].name;
+
+        const fileSampul = new FileReader();
+        fileSampul.readAsDataURL(sampul.files[0]);
+
+        fileSampul.onload = function (e){
+            imgPreview.src = e.target.result;
+        }
+    }
+
+</script>
 
 <?php echo $this->endSection() ?>
 
-<script>
-    const sampul = document.querySelector('#sampul');
-    const samplulLabel = document.querySelector('custom-file-label');
-    const imgPreview = document.querySelector('img-preview');
 
-    samplulLabel.textContent = sampul.files[0].name;
-
-    const fileSampul = new FileReader();
-</script>
