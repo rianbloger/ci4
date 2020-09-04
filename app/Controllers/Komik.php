@@ -167,13 +167,38 @@ class Komik extends BaseController
                     'required' => '{field} komik harus di isi',
                     'is_unique' => '{field} komik sudah terdaftar'
                 ]
+            ],
+            'sampul' => [
+                'rules' => 'max_size[sampul,1024]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                    'is_image' => 'Yang anda pilih bukan gambar',
+                    'mime_in' => 'Yang anda pilih bukan gambar'
+                ]
             ]
         ])){
-            $validation = \Config\Services::validation();
-            $data['validation'] = $validation;
-            // return view('komik/create',$data);
-            return redirect()->to('/komik/edit/'.$this->request->getVar('slug'))->withInput()->with('validation',$validation);
+//            $validation = \Config\Services::validation();
+//            $data['validation'] = $validation;
+//            return view('komik/create',$data);
+//            return redirect()->to('/komik/edit/'.$this->request->getVar('slug'))->withInput()->with('validation',$validation);
+            return redirect()->to('/komik/edit/'.$this->request->getVar('slug'))->withInput();
         }
+        $fileSampul = $this->request->getFile('sampul');
+//        cek gambar , apakah tetpa gambar lama
+        if($fileSampul->getError() == 4){
+            $namaSampul = $this->request->getVar('sampulLama');
+        }else{
+            //        generate nama sampul random
+            $namaSampul = $fileSampul->getRandomName();
+//        pindahkan file ke folder img
+            $fileSampul->move('img',$namaSampul );
+//            hapus file yang lama
+            $sampulLama = $this->request->getVar('sampulLama');
+            if($sampulLama != 'default.jpg'){
+                unlink('img/'.$sampulLama);
+            }
+        }
+
         $slug = url_title($this->request->getVar('judul'),'-',true);
         $this->komikModel->save(
             [
@@ -182,7 +207,7 @@ class Komik extends BaseController
                 'slug' => $slug,
                 'penulis' => $this->request->getVar('penulis'),
                 'penerbit' => $this->request->getVar('penerbit'),
-                'sampul' => $this->request->getVar('sampul')
+                'sampul' => $namaSampul
             ]
         );
 
