@@ -1,10 +1,9 @@
 <?php namespace App\Controllers;
 
-class Home extends BaseController
+class Pages extends BaseController
 {
 	public function index()
 	{
-		$faker = \Faker\Factory::create();
 		return view('pages/home');
 	}
 
@@ -16,3 +15,6 @@ class Home extends BaseController
 	//--------------------------------------------------------------------
 
 }
+
+
++++
