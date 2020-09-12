@@ -25,8 +25,19 @@
             <div class="x_panel tile ">
                 <div class="x_title">
                     <h2>Daftar orang</h2>
-
                     <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <form action="" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Masukan keyword pencarian" name="keyword" >
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="x_content">
                     <table class="table">
@@ -39,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $i=1; foreach ($orang as $o): ?>
+                        <?php $i=1 + (6*($curentPage - 1)) ; foreach ($orang as $o): ?>
                             <tr>
                                 <th scope="row"><?=$i ?></th>
                                 <td><?=$o['nama'] ?></td>
